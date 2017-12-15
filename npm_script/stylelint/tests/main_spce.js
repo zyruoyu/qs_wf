@@ -14,6 +14,7 @@ describe("两数相减为差",()=>{
         expect(minus(4,2)).to.equal(2);
     })
 })
+
 describe("参数类型错误返回NaN",()=>{
     it('参数错误',()=>{
         expect(isNaN(add(1,"200"))).to.equal(true);
