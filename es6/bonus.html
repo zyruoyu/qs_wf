@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bonus</title>
+</head>
+<body>
+    <script>
+    // 年终奖
+    // 评级 S四个月 A三个月 B两个月 
+    // 年终奖计算函数
+    // function calculateBoonus(performanceLevel,salary){
+    //     // 策略模式 健壮
+    //     if(performanceLevel == 'S+'){
+    //         return salary *100;
+    //     }
+    //     if(performanceLevel=='S'){
+    //        return salary * 4;
+    //     }
+    //     else if(performanceLevel == 'A'){
+    //        return salary * 3;
+    //     }else{
+    //        return salary * 2;
+    //     }
+    //     // 评级越来越多 T1-T10 P1-P10 P23
+    //     // 核心的函数会一直被修改，违反了设计模式里的开放封闭原则 API-将实现逻辑实现自我封装
+    // }
+    // console.log(calculateBoonus("S+",30000))
+    // 如何优化？ 干掉具象 面向接口编程 将相同部分抽象出来
+    // 具体逻辑封闭
+    // var calculateBoonus = function(performanceLevel,salary){
+    //     // 相同点等级对应年终奖数量？
+    //     // 计算的方法 规则 什么等级发多少钱
+    //     // 缺点在与制定规则的人会改来改去
+    //     if(performanceLevel =="S"){
+    //         // 规则 剥离
+    //         return performancS(salary)
+    //     }
+    //     if(performanceLevel =='A'){//解耦
+    //         return performancA(salary)
+    //     }
+    //     if(performanceLevel =='B'){//解耦
+    //         return performancB(salary)
+    //     }
+    // }
+    // // 策略模式 将一个个的计算方法抽象出来，
+    // // 新的规则出来后 加一个新的方法
+    // // 而不需要修改原来的主程逻辑
+    // // 开放封闭原则：当我们在修改原有代码会逻辑时 只要采用增量式的开发方式 不去修改到原有主干逻辑
+    // var performancS = function(salary){
+    //     return salary * 4;
+    // }
+    // var performancA = function(salary){
+    //     return salary * 3;
+    // }
+    // var performancB = function(salary){
+    //     return salary *2;
+    // }
+    // 策略类？
+    // 策略算法可能非常复杂抽离并解耦，复杂实现 进行模块化 既自由健壮又好部署
+    var BOunce = function(){
+        this.salary = null;
+        this.strategy = null;//会用什么算法 算法可换 不同的员工不同的计算方法就好
+    } 
+
+    BOunce.prototype.setSalary = function(salary){
+        this.salary = salary;
+    }
+    BOunce.prototype.setstrategy = function(strategy){
+        this.strategy = strategy;
+    }
+    BOunce.prototype.getBounce = function(){
+        //算法类
+        console.log( this.strategy.calculate(this.salary));
+    }
+
+    var PerformancA = function(){};//面向对象之后，说明更加细致
+    // 接口：calculate 算法类实现
+    // 发年终奖 Bounce类实现
+    PerformancA.prototype.calculate = function(salary){
+        return salary * 4;
+    }
+    var bounce = new BOunce();
+    bounce.setSalary(20000);
+    bounce.setstrategy(new PerformancA());
+    bounce.getBounce();
+    </script>
+</body>
+</html>
