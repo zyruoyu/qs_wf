@@ -1,0 +1,97 @@
+<!-- number string boolen undefined null symbol
+object function array -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>symbol--js新增数据类型</title>
+</head>
+<body>
+    <script>
+    // let wxb = {
+    //     bestLove : '双儿',
+    //     bestLove :'曾柔',
+    //     bestLove :'建林公主',
+    // };
+
+    let shuanger = Symbol();//唯一标志
+    let ake = Symbol();
+    let sq = Symbol();
+    let mjp = Symbol();
+    let jn = Symbol();
+    let zr = Symbol('曾柔');
+
+    let wxb = {
+        name:'韦小宝',
+        [shuanger]:'最爱',
+        [ake]:'最爱',
+        [sq]:'最爱',
+        [jn]:'最爱'
+    }
+    // console.log(shuanger == ake);
+    // console.log(wxb[shuanger]);
+    // console.log(wxb[ake]);
+    for(key in wxb){
+        //symbol 唯一key区别对待
+        console.log(`${key}: ${wxb[key]}`);
+    }
+    // obj.name = '盐率及';//js 动态性 无法得到保障
+    // 字符串 key 不可能的，
+    let age = Symbol('name');
+    let name = Symbol('name');
+    let obj = {
+        [name]:'ff',
+        [age]:19,
+    }
+    const symbols = Object.getOwnPropertySymbols(obj);
+    console.log(symbols);
+    for (symbol of symbols){
+        console.log(obj[symbol])
+    }
+    let f = [1,2,3];
+    console.log(Object.prototype.toString.call(f));
+
+    Array.prototype[Symbol.toStringTag] = 'brray';
+    console.log(Object.prototype.toString.call(f));
+
+    var obj1 = {
+        a:1,
+        b:2,
+    };
+    console.log(Object.getOwnPropertyNames(obj1));
+    var obj2 = Object.create(obj1,{
+        value:function(){
+            return this.foo + 'getter';
+        }
+    }) 
+    obj2.foo = 1;
+    console.log(obj2);
+    console.log(Object.getOwnPropertyNames(obj2));
+
+    class Num {
+        constructor(num){
+            // 变量名前_私有
+            this._num = num;
+        }
+        get num(){
+            console.log('用户访问num')
+            return this._num;
+        }
+        set num(num){
+            console.log('数字需要保存');
+            this._num = num;
+        }
+    }
+    const test = new Num(9);
+    console.log(test._num);
+    // _开头，只是语法习惯的约束
+    // 没有起到private
+    // 提供给对象内部使用，暴露出api
+    // 让外界可以访问到
+    test.num = 99;
+    console.log(test.num);
+    </script>
+</body>
+</html>
