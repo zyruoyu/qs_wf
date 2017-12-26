@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ecde</title>
+</head>
+<body>
+    <script>
+    let ecDO = {
+        // 判断用什么设备上网
+        // isAndroid
+        browserInfo(type){
+            //BOM 访问网页的设备信息
+            // console.log(navigator.userAgent)
+            switch(type){
+                case 'android':return navigator.userAgent.toLowerCase().indexOf('android') !== -1
+                break;
+                case 'iphone':return navigator.userAgent.toLowerCase().indexOf('iphone') !== -1
+                break;
+                case 'ipad':return navigator.userAgent.toLowerCase().indexOf('ipad') !== -1
+                break;
+                case 'weixin':return navigator.userAgent.toLowerCase().indexOf('MicroMessenger') !== -1
+                break;
+                default: return navigator.userAgent;
+            }
+        },
+        //解析url的一个对象
+        //http://localhost:3000/ecdo.html?a=1&b=3
+        // {
+        //     a:1,
+        //     b:3
+        // }query string ->query obj
+        getUrlPrmt(url){
+
+        }
+    }
+ if(ecDO.browserInfo('weixin')){
+        alert('weixin');
+    }
+    // h5页面 在微信生态和微信环境下有较大区别
+    // 微信中可以得到微信授权
+    </script>
+</body>
+</html>
