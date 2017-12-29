@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日历控件</title>
+</head>
+<body>
+        <script>
+            // +-{n}m/d/y
+        let date = new Date();
+        // date.getMonth()=date.getMonth()+1;
+        console.log("今天是：" + (date.getMonth()+1) +"/" +date.getDate()+"/" + date.getFullYear());
+        const METHOODS = {
+            m:'Month',
+            d:'Date',
+            y:'Year',
+        }
+
+        function resetDate(d, offset) {
+            offset = offset.toLowerCase();
+            console.log(offset);
+            let result = {};
+            
+            // return d;
+            offset.replace(/([+-]\d+)([ydm])/,(match,number,until)=>{
+                console.log(match,number,until);
+                result[until] = Number(number);
+                date[`set${METHOODS[until]}`](
+                    date[`get${METHOODS[until]}`]() + result[until]
+                );
+                console.log( (date.getMonth()+1) +"/" +date.getDate()+"/" + date.getFullYear());
+            })
+        }
+        resetDate(date, "+3d");
+
+    </script>
+
+</body>
+</html>
