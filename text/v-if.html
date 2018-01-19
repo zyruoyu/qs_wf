@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="./vue.js"></script>
+    <title>V-for 案例</title>
+</head>
+<body>
+    <h1>v-for指令用法</h1>
+    <hr>
+    <div id="app">
+       <ul>
+           <li v-for="item in sortItems">
+                {{item}}
+           </li>
+       </ul>
+       <ul>
+            <li v-for="(student,index) in sortStudents">
+                {{index+1}}: {{student.name}} -- {{student.age}}
+            </li>
+        </ul>
+        <span v-text="message"></span>
+        <span v-html="dodo"></span>
+        <p>
+            本次得分{{score}}
+            <button v-on:click="add">加分</button>
+            <button v-on:click="down">减分</button><br>
+            <input type="text" v-on:keyup.13="onEnter" v-model="score2"><br>
+            <p>{{message}}asd</p>
+            <input type="text" v-model="message">
+            <input type="text" v-model.lazy="message">
+            <input type="text" v-model.number="message">
+            <input type="text" v-model.trim="message">
+            <hr>
+            <textarea name="" id="" cols="30" rows="10" v-model="message"></textarea><br>
+            <input type="checkbox" v-model="isTrue">
+            <span>{{isTrue}}</span>
+        </p>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                isTrue: true,
+                score: 0,
+                score2: 1,
+                message: "hello world",
+                dodo:'<h2>sda</h2>',
+                items:[20,23,18,65,3,19,54,56,41],
+                students:[
+                    {name:'zy',age:18},
+                    {name:'zp',age:19},
+                    {name:'zT',age:17}
+                ]
+
+            },
+            computed:{
+                sortItems:function(){
+                    return this.items.sort(sortNumber)
+                    
+                },
+                sortStudents:function(){
+                    return sortByKey(this.students,'age')
+                }
+            },
+            methods:{
+                add:function(){
+                    this.score++;
+                },
+                down:function(){
+                    this.score--
+                },
+                onEnter:function(){
+                    this.score = this.score + parseInt(this.score2)
+                }
+            }
+        })
+        function sortNumber (a,b){
+            return a-b
+        }
+        function sortByKey(array,key){
+            return array.sort(function(a,b){
+            var x=a[key];
+            var y=b[key];
+            return x-y;
+        });
+    }
+</script>
+</body>
+</html>
