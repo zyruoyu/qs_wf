@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component</title>
+</head>
+<body>
+    <script src="./vue.js"></script>
+    <div id="app">
+        <zy></zy>
+        <zyruoyu v-bind:here="message"></zyruoyu>
+    </div> 
+
+    <script>
+        Vue.component('zy',{
+            template:`<div style="color:red">这是一个全局组件</div>`
+        })
+        var app = new Vue({
+            el: '#app',
+            data:{
+                message:'siChuan'
+            },
+            components:{
+                'zyruoyu':{
+                    template:`<div style="color:green; font-size:40px">
+                    panan from {{here}}</div>`,
+                    props: ['here'],
+                }
+            },
+            
+        })
+    </script>
+</body>
+</html>
