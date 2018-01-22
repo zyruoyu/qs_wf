@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed</title>
+</head>
+<body>
+    <script src="./vue.js"></script>
+    <div id="app" style="color:red">
+        {{newPrice}}!
+        <ul>
+            <li v-for="item in reverseNewsList">{{item.title}}-{{item.date}}</li>
+        </ul>
+    </div>
+    <script>
+        const newsList = [
+        {title:'国务院',date:'2017/3/25'},
+        {title:'专家',date:'2017/3/26'},
+        {title:'科学',date:'2017/3/26'},
+        {title:'陕西省',date:'2017/3/27'},
+        ]
+        const app = new Vue({
+            el: '#app',
+            data:{
+                price: '100$',
+                newsList: newsList,
+            },
+            computed:{
+                newPrice:function(){
+                    return this.price = '￥' + this.price + '元'
+                },
+                reverseNewsList:function(){
+                    return this.newsList.reverse();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
