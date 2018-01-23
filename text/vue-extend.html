@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-extend</title>
+</head>
+<body> 
+    <script src="./vue.js"></script>
+    <author>
+        <button>add</button>
+    </author>
+    <div id="app">
+        <h1>vue.entend 扩展实例构造器</h1>
+        
+        <p>${num}</p>
+        <button @click="add">add</button>
+    </div>
+    <script>
+        var extendObj = {
+            updated:function(){
+                console.log('这是扩展的update')
+            },
+            methods:{
+                add:function(){ 
+                    console.log('我是原生的方法')
+                    this.num++
+                }
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data:{
+                num:2
+            },
+            methods:{
+                add:function(){ 
+                    this.num++
+                }
+            },
+            extends:extendObj,
+            updated:function(){
+                console.log('这是原生的update')
+            },
+            delimiters:['${','}']
+
+        })
+        
+        var authorURL = Vue.extend({
+            template:"<p><a :href='authorURL'>{{authorName}}-{{a}}</a></p>",
+            data:function(){
+                return{
+                    
+                    authorName:'zyruoyu',
+                    authorURL:'http://www.baidu.com'
+                }
+            },
+            props:['a'],
+            
+        });
+        new authorURL({propsData:{a:12}}).$mount('author');
+    </script>   
+</body>
+</html>
