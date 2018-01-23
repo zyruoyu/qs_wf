@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>example methods Demo</title>
+</head>
+<body>
+    <script src="./vue.js"></script>
+    <script src="./jquery-3.3.1.min.js"></script>
+    <div id="app">
+        <p>{{message}}</p>
+        <button>add</button>
+    </div>
+    <p><button onclick="destroy()">卸载</button></p>
+    
+    <script>
+        var zy = Vue.extend({
+            template:`<p>{{message}}</p>`,
+            data:function(){
+                return{
+                    message: ' I am zyry'
+                }
+            },
+            mounted:function(){
+                console.log('mounted 被创建')
+            },
+            destroyed:function(){
+                console.log('destroy被销毁')
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message:'hello world'
+            },
+            // mounted: function(){
+            //     $('#app').html('我是jquery')
+            // },
+            methods:{
+                add:function(){
+                    console.log('调用了构造器内部 add的方法')
+                }
+            }
+        })
+        app.add()
+        var vm = new zy().$mount('#app')
+        function destroy(){
+            vm.$destroy();
+        }
+    </script>
+</body>
+</html>
