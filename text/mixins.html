@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mixins</title>
+</head>
+<body>
+    <script src="./vue.js"></script>
+    <div id="app">
+        <p>{{num}}</p>
+        <button @click="add">add</button>
+    </div>
+    <script>
+        Vue.mixin({
+            updated:function(){
+                console.log('全局混入')
+            }
+        })
+        var addconsole = {
+            updated:function(){
+                console.log('数据改变',this.num)
+            }
+        }
+        var app = new Vue({
+            el: '#app',
+            data:{
+                num: 1,
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            },
+            mixins:[addconsole],
+            updated:function(){
+                console.log('原生update')
+            }
+        })
+    </script>
+</body>
+</html>
