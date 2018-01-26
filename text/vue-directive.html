@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义组件directive</title>
+</head>
+<body>
+    <h1>directive</h1>
+    <hr>
+    <div id="app">
+        <div>{{num}}</div>
+        <div v-zy="font">10</div>
+        <p>
+            <button @click="add">add</button>
+        </p>
+        <p>
+            <button onclick="app.$destroy()">解绑</button>
+        </p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        
+        Vue.directive("zy",{
+            bind:function(el,binding){//被绑定
+                console.log('bind');
+                el.style="font-size:"+binding.value;
+            },
+            inserted:function(){//绑定到节点
+                console.log('inserted')
+            },
+            update:function(){//组件更新的时候
+                console.log('update')
+            },
+            componentUpdated:function(){//组件完成更新后
+                console.log('componentUpdated')
+            },
+            unbind:function(){//解绑
+                console.log('unbind')
+            }
+        })
+        
+
+        var app = new Vue({
+            el: '#app',
+            data:{
+                num: 0,
+                red: 'red',
+                font:'50px',
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            }
+        })
+    </script>
+</body>
+</html>
