@@ -11,24 +11,70 @@
     <div id="app">
         <zy></zy>
         <zyruoyu v-bind:here="message"></zyruoyu>
+        <zyry></zyry>
+        <component v-bind:is="who"></component>
+        <button @click="change">change</button>
     </div> 
 
     <script>
         Vue.component('zy',{
             template:`<div style="color:red">这是一个全局组件</div>`
         })
+        const componentA = {
+            template:`<div style="color:red">componentA</div>`
+        }
+        const componentB = {
+            template:`<div style="color:yellow">componentB</div>`
+        }
+        const componentC = {
+            template:`<div style="color:blue">componentC</div>`
+        }
+        const city = {
+            template:`<div style="color:yellow; font-size:40px">
+                    panan from siChuan</div>`
+        }
+        const zyry = {
+            template:`<div><div style="color:blue; font-size:40px">
+                    panan from china</div>
+                    <city></city>
+                    </div>`,
+            components:{
+                "city":city,
+                
+            }
+        }
+
+        
+
         var app = new Vue({
             el: '#app',
             data:{
-                message:'siChuan'
+                message:'siChuan',
+                who:'componentA'
             },
             components:{
                 'zyruoyu':{
                     template:`<div style="color:green; font-size:40px">
                     panan from {{here}}</div>`,
                     props: ['here'],
-                }
+                },
+                'zyry': zyry,
+                'componentA':componentA,
+                'componentB':componentB,
+                'componentC':componentC,
             },
+            methods:{
+                change:function(){
+                    if(this.who == 'componentA'){
+                        this.who="componentB"
+                    }else if(this.who == 'componentB'){
+                        this.who="componentC"
+                    }
+                    else{
+                        this.who="componentA"
+                    }
+                }
+            }
             
         })
     </script>
