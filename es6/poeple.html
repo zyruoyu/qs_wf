@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>people</title>
+</head>
+<body>
+    <div class="people">
+        <p>Wes</p>
+        <p>Kait</p>
+        <p>Randy</p>
+    </div>
+</body>
+<script>
+    // 获取页面上的元素p，将这些名字串联起来，中间用，隔开
+    // 数组 多个元素 类数组 转换成为真正的数组
+    var people =Array.from(document.querySelectorAll('.people p'));
+    // var name= [];
+    strNames= people.map(person => person.innerHTML).join(',');
+    console.log(strNames);
+    // for(var i= 0;i<people.length;i++){
+    //     a.push(people[i].innerText);
+    // }
+    // console.log(a.join(','));
+    // console.log(Object.prototype.toString.call(a));
+
+</script>
+</html>
